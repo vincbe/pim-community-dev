@@ -131,7 +131,6 @@ class FixturesContext extends BaseFixturesContext
         $this->getContainer()->get('pim_catalog.validator.unique_value_set')->reset();
         $this->getContainer()->get('pim_catalog.validator.unique_axes_combination_set')->reset();
 
-        $this->refresh($product);
         $this->buildProductHistory($product);
 
         $this->getElasticsearchProductClient()->refreshIndex();
@@ -1519,8 +1518,6 @@ class FixturesContext extends BaseFixturesContext
         $productModel = $this->spin(function () use ($code) {
             return $this->getProductModelRepository()->findOneByIdentifier($code);
         }, sprintf('Could not find a product model with code "%s"', $code));
-
-        $this->refresh($productModel);
 
         return $productModel;
     }
