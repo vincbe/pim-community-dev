@@ -16,6 +16,20 @@ Changes the constructor of `Pim\Bundle\EnrichBundle\Controller\Rest\ProductModel
 
 - PIM-6958: fix loading a product with a reference data that is not available (simpleselect or multiselect)
 
+
+## Better manage products with variants!
+
+- PIM-6341: Allow cascade deletion of product models via the grid and PEF
+
+
+## Improvements
+
+
+## BC breaks
+
+- MySQL table constraints and elasticsearch indexes have changed. Please execute the latent migrations using the `doctrine:migrations:migrate` console command.
+
+
 # 2.0.7 (2017-11-23)
 
 ## Better manage products with variants!
