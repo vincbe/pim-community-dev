@@ -43,6 +43,9 @@ class JobQueueConsumerCommand extends ContainerAwareCommand
     /** Interval in microseconds before checking if the process is still running. */
     private const RUNNING_PROCESS_CHECK_INTERVAL = 200000;
 
+    /** Interval in seconds to wait after an exception occurred.*/
+    private const EXCEPTION_WAIT_INTERVAL = 5;
+
     /**
      * {@inheritdoc}
      */
@@ -88,7 +91,7 @@ class JobQueueConsumerCommand extends ContainerAwareCommand
                 while ($process->isRunning()) {
                     if ($iteration < $nbIterationBeforeUpdatingHealthcheck) {
                         $iteration++;
-                        usleep(200000);
+                        usleep(self::RUNNING_PROCESS_CHECK_INTERVAL);
 
                         continue;
                     }
@@ -113,6 +116,8 @@ class JobQueueConsumerCommand extends ContainerAwareCommand
             } catch (\Throwable $t) {
                 $errOutput->writeln(sprintf('An error occurred: %s', $t->getMessage()));
                 $errOutput->writeln($t->getTraceAsString());
+
+                sleep(self::EXCEPTION_WAIT_INTERVAL);
             }
         } while (false === $input->getOption('run-once'));
     }
