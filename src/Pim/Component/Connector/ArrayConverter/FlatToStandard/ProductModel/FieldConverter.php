@@ -35,7 +35,7 @@ class FieldConverter implements FieldConverterInterface
     /**
      * {@inheritdoc}
      */
-    public function convert(string $fieldName, string $value): ConvertedField
+    public function convert(string $fieldName, $value): ConvertedField
     {
         $associationFields = $this->assocFieldResolver->resolveAssociationColumns();
 
@@ -52,7 +52,7 @@ class FieldConverter implements FieldConverterInterface
             return new ConvertedField($fieldName, $categories);
         }
 
-        return new ConvertedField($fieldName, $value);
+        return new ConvertedField($fieldName, (string) $value);
     }
 
     /**

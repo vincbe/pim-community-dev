@@ -3,6 +3,7 @@
 ## Bug fixes
 
 - PIM-6958: fix loading a product with a reference data that is not available (simpleselect or multiselect)
+- PIM-7037: Product Model Import - Error the field "code" should contain a string
 
 # 2.0.7 (2017-11-23)
 
